@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Map view configurations" minToolsVersion="14.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Weather Table View Controller-->
+        <scene sceneID="JxI-XG-blA">
+            <objects>
+                <tableViewController storyboardIdentifier="WeatherTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8v7-UA-9lT" customClass="WeatherTableViewController" customModule="WeatherParallax" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="kgn-sc-RRg" customClass="ParallaxTableView" customModule="WeatherParallax" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="53H-KI-06C">
+                            <rect key="frame" x="0.0" y="0.0" width="390" height="300"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" showsCompass="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="edj-at-9gt">
+                                    <rect key="frame" x="0.0" y="0.0" width="390" height="300"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="300" id="q6H-Eg-5iI"/>
+                                    </constraints>
+                                    <hybridMapConfiguration key="preferredConfiguration"/>
+                                </mapView>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="edj-at-9gt" secondAttribute="trailing" id="0V2-Fb-wKS"/>
+                                <constraint firstAttribute="bottom" secondItem="edj-at-9gt" secondAttribute="bottom" id="684-KX-ccI"/>
+                                <constraint firstItem="edj-at-9gt" firstAttribute="leading" secondItem="53H-KI-06C" secondAttribute="leading" id="VQX-MQ-MmB"/>
+                            </constraints>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="O21-bN-kvp">
+                                <rect key="frame" x="0.0" y="350" width="390" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="O21-bN-kvp" id="V00-o8-llS">
+                                    <rect key="frame" x="0.0" y="0.0" width="390" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="8v7-UA-9lT" id="rrW-XF-ZJW"/>
+                            <outlet property="delegate" destination="8v7-UA-9lT" id="bg6-eP-sD4"/>
+                            <outlet property="height" destination="q6H-Eg-5iI" id="VbU-j5-2za"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="mapView" destination="edj-at-9gt" id="1Dv-WQ-X7i"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EOa-e1-fp1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1396.9230769230769" y="0.7109004739336493"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
