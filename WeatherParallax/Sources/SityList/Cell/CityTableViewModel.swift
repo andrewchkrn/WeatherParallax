@@ -10,8 +10,8 @@ import Foundation
 class CityTableViewModel {
     
     struct Const {
-        let first: String = "https://infotech.gov.ua/storage/img/Temp3.png"
-        let second: String = "https://infotech.gov.ua/storage/img/Temp1.png"
+        static let first: String = "https://infotech.gov.ua/storage/img/Temp3.png"
+        static let second: String = "https://infotech.gov.ua/storage/img/Temp1.png"
     }
     
     // MARK: - Properties
@@ -28,8 +28,8 @@ class CityTableViewModel {
     // MARK: - Public func
     func configure(index: Int) -> URL? {
         let indexIsEven = (index % 2 == 0)
-        let first = URL(string: Const().first)
-        let second = URL(string: Const().second)
+        let first = URL(string: Const.first)
+        let second = URL(string: Const.second)
         return indexIsEven ? first : second
     }
 }

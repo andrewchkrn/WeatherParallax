@@ -10,8 +10,8 @@ import UIKit
 class SityListViewController: UIViewController, Storybordable {
     
     struct Const {
-        let nibName: String = "CityTableViewCell"
-        let forCellReuseIdentifier: String = "city"
+        static let nibName: String = "CityTableViewCell"
+        static let forCellReuseIdentifier: String = "city"
     }
     
     // MARK: - @IBAction func
@@ -31,7 +31,7 @@ class SityListViewController: UIViewController, Storybordable {
     
     // MARK: - Private func
     private func setupTableView() {
-        tableView.register(UINib(nibName: Const().nibName, bundle: nil), forCellReuseIdentifier: Const().forCellReuseIdentifier)
+        tableView.register(UINib(nibName: Const.nibName, bundle: nil), forCellReuseIdentifier: Const.forCellReuseIdentifier)
     }
 }
 // MARK: - SityListViewProtocol
@@ -79,7 +79,7 @@ extension SityListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: Const().forCellReuseIdentifier, for: indexPath) as? CityTableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: Const.forCellReuseIdentifier, for: indexPath) as? CityTableViewCell {
             if let model = viewModel.isSearch ? viewModel?.filteredTableData[indexPath.row] : viewModel?.model[indexPath.row] {
                 cell.configure(CityTableViewModel(model), index: indexPath.row)
             }

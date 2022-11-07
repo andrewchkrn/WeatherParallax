@@ -11,8 +11,8 @@ import MapKit
 class WeatherTableViewController: UITableViewController, Storybordable {
     
     struct Const {
-        let nibName: String = "WeatherTableViewCell"
-        let forCellReuseIdentifier: String = "weather"
+        static let nibName: String = "WeatherTableViewCell"
+        static let forCellReuseIdentifier: String = "weather"
     }
     
     @IBOutlet private weak var mapView: MKMapView!
@@ -42,7 +42,7 @@ class WeatherTableViewController: UITableViewController, Storybordable {
     }
     
     private func setupTableView() {
-        tableView.register(UINib(nibName: Const().nibName, bundle: nil), forCellReuseIdentifier: Const().forCellReuseIdentifier)
+        tableView.register(UINib(nibName: Const.nibName, bundle: nil), forCellReuseIdentifier: Const.forCellReuseIdentifier)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -50,7 +50,7 @@ class WeatherTableViewController: UITableViewController, Storybordable {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: Const().forCellReuseIdentifier, for: indexPath) as? WeatherTableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: Const.forCellReuseIdentifier, for: indexPath) as? WeatherTableViewCell {
             if let model = viewModel?.model {
                 cell.configure(WeatherCellViewModel(model))
             }
@@ -60,7 +60,7 @@ class WeatherTableViewController: UITableViewController, Storybordable {
     }
 }
 
-    // MARK: - ScrollViewDidScroll
+// MARK: - ScrollViewDidScroll
 extension WeatherTableViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if let parallax = tableView as? ParallaxTableView {
