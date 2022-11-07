@@ -20,7 +20,7 @@ class SityListViewController: UIViewController, Storybordable {
     
     // MARK: - Properties
     weak var coordinator: (CoordinatorProtocol & AppCoordinatorProtocol)?
-    var viewModel: SityListViewModel!
+    var viewModel: SityListViewModelProtocol!
     
     // MARK: - Life cycle
     override func viewDidLoad() {

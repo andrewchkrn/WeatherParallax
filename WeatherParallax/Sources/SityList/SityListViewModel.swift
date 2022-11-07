@@ -8,6 +8,9 @@
 import Foundation
 
 protocol SityListViewModelProtocol: AnyObject {
+    var filteredTableData: [CityList] { get set }
+    var isSearch: Bool { get set }
+    var model: CityModel { get set }
     func viewDidLoad()
     func nextButtonTapped(model: OpenWeatherForm, city: CityList)
     func filterText(searchText: String)
