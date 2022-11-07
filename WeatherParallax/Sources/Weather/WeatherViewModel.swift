@@ -7,11 +7,16 @@
 
 import Foundation
 
-class WeatherViewModel {
+protocol WeatherViewModelProtocol: AnyObject {
+    var model: OpenWeather? { get set }
+    var city: CityList? { get set }
+}
+
+class WeatherViewModel: WeatherViewModelProtocol {
     
     // MARK: - Properties
-    private(set) var model: OpenWeather?
-    private(set) var city: CityList?
+    var model: OpenWeather?
+    var city: CityList?
     
     init(model: OpenWeather, city: CityList) {
         self.model = model

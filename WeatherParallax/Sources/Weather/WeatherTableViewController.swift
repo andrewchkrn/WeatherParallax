@@ -18,7 +18,7 @@ class WeatherTableViewController: UITableViewController, Storybordable {
     @IBOutlet private weak var mapView: MKMapView!
     
     // MARK: - Properties
-    var viewModel: WeatherViewModel!
+    var viewModel: WeatherViewModelProtocol!
     
     // MARK: - Life cycle
     override func viewDidLoad() {
