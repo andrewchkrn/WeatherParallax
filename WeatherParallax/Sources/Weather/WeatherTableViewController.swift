@@ -24,17 +24,16 @@ class WeatherTableViewController: UITableViewController, Storybordable {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
-        setupMap(lat: viewModel.city?.coord.lat, long: viewModel.city?.coord.lon)
+        setupMap(coordinate: viewModel.getCoordinate())
     }
     
     // MARK: - Private func
-    private func setupMap(lat: Double?, long: Double?) {
-        guard let lat = lat else { return }
-        guard let long = long else { return }
+    private func setupMap(coordinate: CLLocation?) {
+        guard let lat = coordinate?.coordinate.latitude else { return }
+        guard let long = coordinate?.coordinate.longitude else { return }
         let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
         let addAnotation = MKPointAnnotation()
         addAnotation.coordinate = coordinate
-        addAnotation.title = viewModel.city?.name
         self.mapView.addAnnotation(addAnotation)
         let zoomRange = MKMapView.CameraZoomRange(minCenterCoordinateDistance: 60000.0, maxCenterCoordinateDistance: 70000.0)
         mapView.setCameraZoomRange(zoomRange, animated: true)
@@ -51,7 +50,7 @@ class WeatherTableViewController: UITableViewController, Storybordable {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: Const.forCellReuseIdentifier, for: indexPath) as? WeatherTableViewCell {
-            if let model = viewModel?.model {
+            if let model = viewModel?.getCell(at: indexPath) {
                 cell.configure(WeatherCellViewModel(model))
             }
             return cell

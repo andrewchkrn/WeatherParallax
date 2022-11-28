@@ -72,15 +72,16 @@ extension SityListViewController: UISearchBarDelegate{
         }
     }
 }
+
 // MARK: - UITableViewDataSource, UITableViewDelegate
 extension SityListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.isSearch ? viewModel.filteredTableData.count : viewModel.model.count
+        return viewModel.isSearch ? viewModel.filterNumberOfRouth() : viewModel.numberOfRouth()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: Const.forCellReuseIdentifier, for: indexPath) as? CityTableViewCell {
-            if let model = viewModel.isSearch ? viewModel?.filteredTableData[indexPath.row] : viewModel?.model[indexPath.row] {
+            if let model = viewModel.isSearch ? viewModel?.getFilteredCell(at: indexPath) : viewModel?.getCell(at: indexPath) {
                 cell.configure(CityTableViewModel(model), index: indexPath.row)
             }
             return cell
@@ -89,7 +90,7 @@ extension SityListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let model = viewModel.model[indexPath.row]
+        guard let model = viewModel.isSearch ? viewModel?.getFilteredCell(at: indexPath) : viewModel?.getCell(at: indexPath) else { return }
         viewModel.nextButtonTapped(model: OpenWeatherForm(lat: model.coord.lat, lon: model.coord.lon), city: model)
     }
 }

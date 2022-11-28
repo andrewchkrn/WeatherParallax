@@ -8,9 +8,11 @@
 import Foundation
 
 protocol SityListViewModelProtocol: AnyObject {
-    var filteredTableData: [CityList] { get set }
     var isSearch: Bool { get set }
-    var model: CityModel { get set }
+    func numberOfRouth() -> Int
+    func filterNumberOfRouth() -> Int
+    func getCell(at indexPath: IndexPath) -> CityList
+    func getFilteredCell(at indexPath: IndexPath) -> CityList
     func viewDidLoad()
     func nextButtonTapped(model: OpenWeatherForm, city: CityList)
     func filterText(searchText: String)
@@ -25,9 +27,9 @@ class SityListViewModel: SityListViewModelProtocol {
     // MARK: - Properties
     weak var view: SityListViewProtocol?
     
-    var model: CityModel
+    private var model: CityModel
     private let apiService: ApiServise
-    var filteredTableData: [CityList] = []
+    private var filteredTableData: [CityList] = []
     var isSearch: Bool = false
     
     init(model: CityModel, apiService: ApiServise = ApiServise()) {
@@ -39,17 +41,33 @@ class SityListViewModel: SityListViewModelProtocol {
         getMockData()
     }
     
+    func numberOfRouth() -> Int {
+        return model.count
+    }
+    
+    func filterNumberOfRouth() -> Int {
+        return filteredTableData.count
+    }
+    
+    func getCell(at indexPath: IndexPath) -> CityList {
+        return model[indexPath.row]
+    }
+    
+    func getFilteredCell(at indexPath: IndexPath) -> CityList {
+        return filteredTableData[indexPath.row]
+    }
+    
     func nextButtonTapped(model: OpenWeatherForm, city: CityList) {
         getWeather(model: model, city: city)
     }
     
     func filterText(searchText: String) {
-        filteredTableData = model.filter({ (text) -> Bool in
-            let tmp: NSString = text.name as NSString
-            let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
-            return range.location != NSNotFound
-        })
-        isSearch = filteredTableData.count != 0
+            self.filteredTableData = self.model.filter({ (text) -> Bool in
+                let tmp: NSString = text.name as NSString
+                let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
+                return range.location != NSNotFound
+            })
+            self.isSearch = self.filteredTableData.count != 0
     }
     
     private func getWeather(model: OpenWeatherForm, city: CityList ) {

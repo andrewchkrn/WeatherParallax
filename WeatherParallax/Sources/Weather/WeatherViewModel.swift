@@ -6,20 +6,29 @@
 //
 
 import Foundation
+import CoreLocation
 
 protocol WeatherViewModelProtocol: AnyObject {
-    var model: OpenWeather? { get set }
-    var city: CityList? { get set }
+    func getCell(at indexPath: IndexPath) -> OpenWeather?
+    func getCoordinate() -> CLLocation
 }
 
 class WeatherViewModel: WeatherViewModelProtocol {
     
     // MARK: - Properties
-    var model: OpenWeather?
-    var city: CityList?
+    var model: OpenWeather
+    var city: CityList
     
     init(model: OpenWeather, city: CityList) {
         self.model = model
         self.city = city
+    }
+    
+    func getCell(at indexPath: IndexPath) -> OpenWeather? {
+        return model
+    }
+    
+    func getCoordinate() -> CLLocation {
+        return CLLocation(latitude: city.coord.lat, longitude: city.coord.lon)
     }
 }
